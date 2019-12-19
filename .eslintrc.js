@@ -17,13 +17,13 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  rules: {
+  rules:  {
     //retornar erro para nós
     "prettier/prettier": "error",
     //não usar o this. na classe
     "class-methods-use-this": "off",
     //quando receber um valor de parametro poder modificar ela
-    "no-param-reassingn": "off",
+    "no-param-reassign": "off",
     //desabilitar o padrão da declaração da variável exemplo deVar
     "camelcase": "off",
     //abrir exeção para declarar a variável NEXT sem utilizar
