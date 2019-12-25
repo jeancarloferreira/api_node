@@ -16,13 +16,23 @@ class NotificationController {
         .json({ erro: 'Somente o prestador pode carregar notificações' });
     }
 
-    const notifications = await Notification.findOne({
+    const notifications = await Notification.find({
       user: req.userId,
     })
       .sort({ creatAt: 'desc' })
       .limit(20);
 
     return res.json(notifications);
+  }
+
+  async update(req, res) {
+    const notification = await Notification.findByIdAndUpdate(
+      req.params.id,
+      { read: true },
+      { new: true }
+    );
+
+    return res.json(notification);
   }
 }
 
