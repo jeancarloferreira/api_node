@@ -4,14 +4,16 @@ import User from '../models/User';
 class NotificationController {
   async index(req, res) {
     const userIsProvider = await User.findOne({
-      id: req.userId,
-      provider: true,
+      where: {
+        id: req.userId,
+        provider: true,
+      },
     });
 
     if (!userIsProvider) {
-      res
+      return res
         .status(401)
-        .status({ erro: 'Somente o prestador pode carregar notificações' });
+        .json({ erro: 'Somente o prestador pode carregar notificações' });
     }
 
     const notifications = await Notification.findOne({
@@ -20,7 +22,7 @@ class NotificationController {
       .sort({ creatAt: 'desc' })
       .limit(20);
 
-    res.json(notifications);
+    return res.json(notifications);
   }
 }
 

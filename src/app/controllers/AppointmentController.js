@@ -46,6 +46,13 @@ class AppointmentController {
 
     const { provider_id, date } = req.body;
 
+    // eslint-disable-next-line eqeqeq
+    if (provider_id == req.userId) {
+      return res
+        .status(401)
+        .json({ erro: 'O prestador de serviço não agendar com ele mesmo' });
+    }
+
     const providerExists = await User.findOne({
       where: { id: provider_id, provider: true },
     });
